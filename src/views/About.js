@@ -27,11 +27,11 @@ export default function About() {
 
     return (
         <Container>
-            <Row id="about" className="text-center" style={{ paddingTop: "100px" }}>
-                <Col lg={6} md={{ span: 8, offset: 2 }} sm={{ span: 10, offset: 1 }}>
+            <Row id="about" className="text-center" style={{ paddingTop: "1vh" }}>
+                <Col lg={6} md={{ span: 8, offset: 3 }} sm={{ span: 10, offset: 1 }}>
                     <h1>What is BlockChat DAO</h1>
                 </Col>
-                <Col className="text-center" lg={6} md={{ span: 8, offset: 2 }} sm={{ span: 10, offset: 1 }}>
+                <Col className="text-center" lg={6} md={{ span: 8, offset: 3 }} sm={{ span: 10, offset: 1 }}>
                     <h4>BlockChat DAO (BCD) is a decentralised DAO2DAO communication platform built specifically for projects to collaborate,
                         exchange project information, in-dapp NFT trading, Metaverse integration and many more features. BCD will be built on
                         the Metis Andromeda Layer 2 network and powered by Peak Finance. </h4>

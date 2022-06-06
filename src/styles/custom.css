@@ -35,11 +35,16 @@ button:hover {
 }
 
 .container {
-  max-width: 1600px;
+  max-width: 1920px;
 }
 
 .socialsFooter {
   display: none;
+}
+
+.mintLink {
+  color: white;
+  text-decoration: none;
 }
 
 @media screen and (max-width: 991px) {
@@ -54,5 +59,17 @@ button:hover {
   .socialsFooter {
     display: inline-block;
     padding-top: 40px;
+  }
+}
+
+@media screen and (max-width: 650px) {
+  html {
+    font-size: calc(0.7vw + 0.8vh)
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .footerSocialCol {
+    display: block;
   }
 }
