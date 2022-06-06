@@ -7,6 +7,8 @@ import Slider from './views/Slider';
 import Partners from './views/Partners';
 import About from './views/About';
 import Roadmap from './views/Roadmap';
+import Minter from './views/Mint';
+import Footer from './views/Footer';
 
 function App() {
   return (
@@ -17,6 +19,8 @@ function App() {
       <Partners />
       <About />
       <Roadmap />
+      <Minter />
+      <Footer />
     </div>
   );
 }

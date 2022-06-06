@@ -13,11 +13,11 @@ const PartnerImage = styled.img`
 `
 
 export class Card extends React.Component {
-    render() {
+    render(key) {
         return (
-            <PartnerCard>
+            <PartnerCard key={key}>
                 <a href={this.props.link}>
-                <PartnerImage key={this.props.key} src={this.props.image} alt="Partner" />
+                    <PartnerImage src={this.props.image} alt="Partner" />
                 </a>
             </PartnerCard>
         );

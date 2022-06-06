@@ -14,7 +14,6 @@ text-align: center;
 export const StyledDiv = styled.div`
 padding: 50px 20px;
 max-width: 500px;
-margin: auto;
 text-align: center;
 display: inline-block;
 `

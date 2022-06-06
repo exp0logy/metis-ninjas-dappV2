@@ -1,48 +1,58 @@
 /* Importing a custom font. */
 @font-face {
-    font-family: "CircularStd";
-    src: url("../font/CircularStd-Medium.eot");
-    src: url("../font/CircularStd-Medium.woff") format("woff"),
+  font-family: "CircularStd";
+  src: url("../font/CircularStd-Medium.eot");
+  src: url("../font/CircularStd-Medium.woff") format("woff"),
     url("../font/CircularStd-Medium.svg") format("svg");
-    }
-
-body{
-    background-color: black;
-    padding: 0 80px;
-    max-width: 1920px;
-    margin: auto;
 }
 
-body, html { 
-    font-family: 'CircularStd', sans-serif;
-    color:white;
+body {
+  background-color: black;
+  max-width: 1920px;
+  margin: auto;
+}
+
+body,
+html {
+  font-family: 'CircularStd', sans-serif;
+  color: white;
+}
+
+button {
+  background-color: black;
+  color: white;
+  border: 2px solid white;
+  border-radius: 25px;
+}
+
+button:hover {
+  background-color: white;
+  color: black;
+}
+
+.row {
+  --bs-gutter-x: "0";
+}
+
+.container {
+  max-width: 1600px;
+}
+
+.socialsFooter {
+  display: none;
+}
+
+@media screen and (max-width: 991px) {
+  .azoriaFooter {
+    padding: 40px 0;
   }
 
-button{
-    background-color: black;
-    color: white;
-    border: 2px solid white;
-    border-radius: 25px;
-}
-button:hover {
-    background-color: white;
-    color: black;
-}
+  .socials {
+    display: none;
+  }
 
-@media (min-width: 768px) {
-    
-    .carousel-inner .carousel-item-end.active,
-    .carousel-inner .carousel-item-next {
-      transform: translateX(25%);
-    }
-    
-    .carousel-inner .carousel-item-start.active, 
-    .carousel-inner .carousel-item-prev {
-      transform: translateX(-25%);
-    }
-}
-
-.carousel-inner .carousel-item-end,
-.carousel-inner .carousel-item-start { 
-  transform: translateX(0);
+  .socialsFooter {
+    display: inline-block;
+    padding-top: 40px;
+  }
 }

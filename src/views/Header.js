@@ -5,12 +5,12 @@ import ConnectWallet from "../components/ConnectWallet";
 const Logo = styled.img`
     width: 7rem;
 `
-const SocialLink = styled.img`
+export const SocialLink = styled.img`
 
 `
 
 /* An array of objects that contain the key, image, and link for each social media account. */
-const socialLinks = [
+export const socialLinks = [
     {
         key: 1,
         image: "/images/socials/tofunft.png",
@@ -30,8 +30,10 @@ const socialLinks = [
 
 export default function Header() {
 
+
+
     return (
-        <Navbar variant="dark" expand="lg">
+        <Navbar style={{ backgroundColor: "black" }} className="sticky-top" variant="dark" expand="lg">
             <Container>
                 <Row>
                     <Navbar.Brand href="#home">
@@ -43,18 +45,16 @@ export default function Header() {
                     <Navbar.Collapse id="basic-navbar-nav">
                         <Nav className="me-auto">
                             <Nav.Link className="m-auto" href="#home">Home</Nav.Link>
-                            <Nav.Link className="m-auto" href="#link">About</Nav.Link>
-                            <Nav.Link className="m-auto" href="#link">Mint Now</Nav.Link>
+                            <Nav.Link className="m-auto" href="#about">About</Nav.Link>
+                            <Nav.Link className="m-auto" href="#mint">Mint Now</Nav.Link>
                             <ConnectWallet />
                             {socialLinks.map((e) => (
-                                <>
-                                    <Nav.Link className="m-auto nav-link" href={e.link}>
-                                        <SocialLink key={e.key} style={{
+                                <Nav.Link key={e.key} className="m-auto nav-link socials" href={e.link}>
+                                    <SocialLink key={e.key} style={{
                                         width: "32px"
-                                        }}
+                                    }}
                                         srcSet={e.image} />
-                                    </Nav.Link>
-                                </>
+                                </Nav.Link>
                             ))}
                         </Nav>
                     </Navbar.Collapse>

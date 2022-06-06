@@ -27,7 +27,7 @@ export default function Partners() {
     return (
         <PartnerDiv>
             <Col className="text-center">
-                <h2>Partners</h2>
+                <h1>Partners</h1>
                 {PartnerImages.map((e) => (
                     <Card key={e.key} image={e.image} link={e.link} />
                 ))}

@@ -1,6 +1,7 @@
 import React from "react";
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 import { Carousel } from 'react-responsive-carousel';
+import { Container } from "react-bootstrap";
 
 let sliderSettingsLg = {
     autoPlay: true,
@@ -9,6 +10,7 @@ let sliderSettingsLg = {
     showIndicators: false,
     showThumbs: false,
     infiniteLoop: true,
+    dynamicHeight: false,
     centerMode: true,
     centerSlidePercentage: 33.3,
 };
@@ -19,7 +21,8 @@ let sliderSettingsSm = {
     showStatus: false,
     showIndicators: false,
     showThumbs: false,
-    infiniteLoop: true
+    infiniteLoop: true,
+    dynamicHeight: false
 };
 
 const Ninjas = [
@@ -66,33 +69,35 @@ export default function Slider() {
     const [isGreaterThan900px, setIsGreaterThan900px] = React.useState(true);
 
     React.useEffect(() => {
-      function handleResize() {
-        if (window.innerWidth > 900) {
-          setIsGreaterThan900px(true);
-        } else {
-          setIsGreaterThan900px(false);
+        function handleResize() {
+            if (window.innerWidth > 900) {
+                setIsGreaterThan900px(true);
+            } else {
+                setIsGreaterThan900px(false);
+            }
         }
-      }
-  
-      handleResize();
-  
-      window.addEventListener("resize", handleResize);
-  
-      return () => window.removeEventListener("resize", handleResize);
+
+        handleResize();
+
+        window.addEventListener("resize", handleResize);
+
+        return () => window.removeEventListener("resize", handleResize);
     }, []);
 
     const SliderSettings = isGreaterThan900px ? sliderSettingsLg : sliderSettingsSm;
 
     return (
-        <Carousel {...SliderSettings}>
-            {Ninjas.map((e) => (
-                <img
-                    key={e.key}
-                    style={{ borderRadius: "30px", height: "250px", width: "250px" }}
-                    src={e.image}
-                    alt={e.alt}
-                />
-            ))}
-        </Carousel>
+        <Container style={{ padding: "15px" }}>
+            <Carousel {...SliderSettings}>
+                {Ninjas.map((e) => (
+                    <img
+                        key={e.key}
+                        style={{ margin: "0 auto", borderRadius: "30px", height: "250px", width: "250px" }}
+                        src={e.image}
+                        alt={e.alt}
+                    />
+                ))}
+            </Carousel>
+        </Container>
     );
 }
