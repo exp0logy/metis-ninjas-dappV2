@@ -4,12 +4,11 @@ import React from "react";
 const PartnerCard = styled.div`
     width: 200px;
     height: 200px;
-    border-radius: 20px;
     display: inline-block;
-    margin: 40px
+    margin: 0 50px;
 `
 const PartnerImage = styled.img`
-    width: 150px
+    width: 12rem;
 `
 
 export class Card extends React.Component {

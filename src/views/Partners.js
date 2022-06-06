@@ -3,7 +3,7 @@ import styled from "styled-components";
 import Card from "../components/Card";
 
 const PartnerDiv = styled.div`
-    padding-top: 150px;
+    padding: 150px 0;
 `
 const PartnerImages = [
     {
@@ -27,7 +27,7 @@ export default function Partners() {
     return (
         <PartnerDiv>
             <Col className="text-center">
-                <h1>Partners</h1>
+                <h1 style={{ paddingBottom: "50px" }}>Partners</h1>
                 {PartnerImages.map((e) => (
                     <Card key={e.key} image={e.image} link={e.link} />
                 ))}
