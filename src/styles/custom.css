@@ -64,7 +64,7 @@ button:hover {
 
 @media screen and (max-width: 650px) {
   html {
-    font-size: calc(0.7vw + 0.8vh)
+    font-size: calc(0.9vw + 0.8vh)
   }
 }
 
