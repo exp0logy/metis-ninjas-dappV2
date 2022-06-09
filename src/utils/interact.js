@@ -1,6 +1,5 @@
 import BigNumber from "bignumber.js";
 import Web3 from "web3/dist/web3.min.js";
-
 import contractABI from "./contract-abi.json";
 
 const contractAddress = "0x4FEc2339cC9dcD9bfFDAcC589460111A06cAB80c"; //TESNET 
@@ -12,6 +11,37 @@ export const connectWallet = async () => {
       const addressArray = await window.ethereum.request({
         method: "eth_requestAccounts",
       });
+      if (window.ethereum.networkVersion !== "588")
+        try {
+          await window.ethereum.request({
+            method: 'wallet_switchEthereumChain',
+            params: [{ chainId: '0x24C' }],
+            //  params: [{ chainId: '0x440' }],
+          });
+        } catch (switchError) {
+          // This error code indicates that the chain has not been added to MetaMask.
+          if (switchError.code === 4902) {
+            try {
+              await window.ethereum.request({
+                method: 'wallet_addEthereumChain',
+                params: [
+                  {
+                    chainId: '0x24C',
+                    chainName: 'Metis Andromeda Testnet',
+                    rpcUrls: ['https://stardust.metis.io/?owner=588'],
+                  },
+                  // {
+                  //   chainId: '0x440',
+                  //   chainName: 'Metis Andromeda Testnet',
+                  //   rpcUrls: ['https://stardust.metis.io/?owner=588'],
+                  // },
+                ],
+              });
+            } catch (addError) {
+              console.log(addError);
+            }
+          }
+        }
       const obj = {
         status: "",
         address: addressArray[0],
@@ -24,71 +54,7 @@ export const connectWallet = async () => {
       };
     }
   } else {
-    return {
-      address: "",
-      status: (
-        <span>
-          <p>
-            {" "}
-            🦊{" "}
-            <a
-              target="_blank"
-              rel="noreferrer"
-              href={`https://metamask.io/download.html`}
-            >
-              You must install Metamask, a virtual Ethereum wallet, in your
-              browser.
-            </a>
-          </p>
-        </span>
-      ),
-    };
-  }
-};
-
-export const getCurrentWalletConnected = async () => {
-  if (window.ethereum) {
-    try {
-      const addressArray = await window.ethereum.request({
-        method: "eth_accounts",
-      });
-      if (addressArray.length > 0) {
-        return {
-          address: addressArray[0],
-          status: "",
-        };
-      } else {
-        return {
-          address: "",
-          status: "🦊 Connect to Metamask using the top right button.",
-        };
-      }
-    } catch (err) {
-      return {
-        address: "",
-        status: err.message,
-      };
-    }
-  } else {
-    return {
-      address: "",
-      status: (
-        <span>
-          <p>
-            {" "}
-            🦊{" "}
-            <a
-              target="_blank"
-              rel="noreferrer"
-              href={`https://metamask.io/download.html`}
-            >
-              You must install Metamask, a virtual Ethereum wallet, in your
-              browser.
-            </a>
-          </p>
-        </span>
-      ),
-    };
+    window.alert("Etherum Not Detected in Window. Please install Metamask.")
   }
 };
 
@@ -102,34 +68,19 @@ export const fetchMintedTokens = async () => {
 };
 
 const oneMintPrice = (count) => {
-  if (count < 5) return 0;
-  if (count >= 5 && count < 10) return 0;
-  return 0
+  // const price = count <= 2 ? 2 : count >= 3 && count <= 5 ? 1.7 : count >= 6 && count <= 10 ? 1.5 : 1.2
+  // return price
 
   //
   // Lower logic is for Testnet contract
   //
 
-  // if (count < 5) return 0.01;
-  // if (count >= 5 && count < 10) return 0.005;
-  // return 0.003;
+  const price = count <= 2 ? 0.4 : count >= 3 && count <= 5 ? 0.3 : count >= 6 && count <= 10 ? 0.2 : 0.1
+  return price
+
 };
 
 export const mintNFT = async (count) => {
-  if (!window.ethereum)
-    return {
-      success: false,
-      status: "Add Metamask",
-      tx: null,
-    };
-
-  if (window.ethereum.networkVersion !== "588")
-    return {
-      success: false,
-      status: "Connect to Andromeda Metis",
-      tx: null,
-    };
-
   const web3 = new Web3(window.ethereum);
   const NinjasContract = new web3.eth.Contract(contractABI, contractAddress);
 
@@ -141,7 +92,8 @@ export const mintNFT = async (count) => {
   try {
     const tx = await NinjasContract.methods.purchase(count).send({
       from: window.ethereum.selectedAddress,
-      value,
+      value: value,
+      gasLimit: 3000000
     });
     return {
       success: true,

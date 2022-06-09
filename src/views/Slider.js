@@ -13,6 +13,7 @@ let sliderSettingsLg = {
     dynamicHeight: false,
     centerMode: true,
     centerSlidePercentage: 33.3,
+    transitionTime: 1000
 };
 
 let sliderSettingsSm = {
@@ -22,7 +23,8 @@ let sliderSettingsSm = {
     showIndicators: false,
     showThumbs: false,
     infiniteLoop: true,
-    dynamicHeight: false
+    dynamicHeight: false,
+    transitionTime: 1000
 };
 
 const Ninjas = [
@@ -86,10 +88,17 @@ export default function Slider() {
 
     const SliderSettings = isGreaterThan900px ? sliderSettingsLg : sliderSettingsSm;
 
+    let slides = [];
+    for (var i = 0; i < 24; i++) {
+        let ninja = { key: i, image: `/images/ninjas/${i}.png`, alt: `Ninja ${i}` }
+        slides.push(ninja)
+    }
+
+
     return (
         <Container style={{ padding: "15px" }}>
             <Carousel {...SliderSettings}>
-                {Ninjas.map((e) => (
+                {slides.map((e) => (
                     <img
                         key={e.key}
                         style={{ margin: "0 auto", borderRadius: "30px", height: "250px", width: "250px" }}

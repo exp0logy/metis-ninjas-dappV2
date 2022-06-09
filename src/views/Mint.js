@@ -4,8 +4,10 @@ import {
   getCurrentWalletConnected,
   mintNFT,
 } from "../utils/interact.js";
-import { Row, Col, Toast, Alert, ToastContainer, Popover } from "react-bootstrap";
+import { Row, Col, Alert } from "react-bootstrap";
 import styled from "styled-components";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Ninja = styled.img`
 width: 200px;
@@ -15,10 +17,10 @@ border-radius: 10px;
 `
 
 const NinjaAdjust = styled.button`
-  width: 100px;
+  width: 140px;
   height: 50px;
   border-radius: 100px;
-  margin: 0 10px;
+  margin: 20px 30px;
 `
 
 
@@ -33,11 +35,6 @@ const Minter = (props) => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const { address, status } = await getCurrentWalletConnected();
-
-      setWallet(address);
-      setStatus(status);
-
       addWalletListener();
     };
     fetchData();
@@ -104,6 +101,7 @@ const Minter = (props) => {
     } else {
       setSuccess(false);
       setError(true);
+      console.log(error)
     }
   };
 
@@ -112,17 +110,16 @@ const Minter = (props) => {
 
   const price = count > 3 && count < 5 ? 1.7 : count >= 5 && count < 10 ? 1.5 : count >= 10 ? 1.2 : 2
 
-  const dismissWarning = () => { setError(false) };
-
   var txnId = `https://andromeda-explorer.metis.io/tx/${status}/`
 
   return (
-    <Col id="mint" className="text-center" style={{ paddingTop: '50px' }}>
+    <Col id="mint" className="text-center" style={{ paddingTop: '100px' }}>
       {info <= 5000 ? (
         <Col>
           <Row>
-            <h2>Minted: {info} / 5000</h2>
-            <h3 style={{ padding: "10px 0" }}>How Many?</h3>
+            <h1 style={{ paddingBottom: "70px" }}>Mint your Ninjas</h1>
+            <h1 style={{ fontSize: "70px" }}>{info} / 5000</h1>
+            <h3 style={{ padding: "30px 0" }}>How Many?</h3>
             <h2 style={{ padding: "10px 0" }}>{count}</h2>
           </Row>
           <Row style={{ padding: "10px 0" }}>
@@ -135,20 +132,27 @@ const Minter = (props) => {
               </NinjaAdjust>
               <NinjaAdjust onClick={increment}>+</NinjaAdjust>
               {!success && count != 0 && (
-                <h4 style={{ padding: "15px 0" }}>Total Cost: {parseFloat(price * count).toFixed(1)} Metis</h4>
+                <p style={{ paddingTop: "15px" }}>Total Cost: {parseFloat(price * count).toFixed(1)} Metis</p>
               )}
-              {error &&
-                <ToastContainer position="middle-center">
-                  <Toast bg="danger" onClose={() => setError(false)} show={error} delay={5000} autohide>
-                    <Toast.Header>
-                      <strong className="me-auto">Ninja Master</strong>
-                    </Toast.Header>
-                    <Toast.Body>Have you connected your wallet?</Toast.Body>
-                  </Toast>
-                </ToastContainer>}
+              <p style={{ paddingTop: "10px" }}>1 - 2 Ninjas = 2 Metis each<br />
+                3 - 5 Ninjas = 1.7 Metis each<br />
+                6 - 10 Ninjas = 1.5 Metis each<br />
+                10+ Ninjas = 1.2 Metis each</p>
+              {error && <ToastContainer
+                position="top-right"
+                autoClose={5000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+              />
+              }
             </div>
           </Row>
-        </Col>
+        </Col >
       ) : (
         <h3>All Ninjas have been minted!</h3>
       )
@@ -163,7 +167,7 @@ const Minter = (props) => {
             <h2 style={{ padding: "20px 0" }}>Your Ninja Champions!</h2>
             {mintedTokens.map((item) => (
               <Ninja
-                src={`/images/TEST/${Math.floor(Math.random() * (5 - 10) + 1 + 10)}.png`}
+                src={`/images/ninjas/${Math.floor(Math.random() * (5 - 10) + 1 + 10)}.png`}
                 alt="Toadz"
               />
             ))}

@@ -47,9 +47,20 @@ button:hover {
   text-decoration: none;
 }
 
+@media screen and (max-width: 767px) {
+  ul {
+    text-align: center;
+    list-style-position: inside
+  }
+
+  body {
+    text-align: center;
+  }
+}
+
 @media screen and (max-width: 991px) {
   .azoriaFooter {
-    padding: 40px 0;
+    padding: 10px 0;
   }
 
   .socials {
@@ -58,7 +69,10 @@ button:hover {
 
   .socialsFooter {
     display: inline-block;
-    padding-top: 40px;
+  }
+
+  .section {
+    padding: 0 15px;
   }
 }
 
@@ -66,10 +80,34 @@ button:hover {
   html {
     font-size: calc(0.9vw + 0.8vh)
   }
+
+  .pbp {
+    padding-bottom: 0;
+    width: 190px;
+  }
 }
 
 @media screen and (max-width: 576px) {
   .footerSocialCol {
     display: block;
   }
+}
+
+ul .slider .animated {
+  transition-duration: 1000ms !important;
+}
+
+.about-rows {
+  padding: 40px 0;
+}
+
+.pbp {
+  padding-bottom: 5px;
+  width: 190px;
+  display: inline-block;
+}
+
+.vert-center {
+  display: flex;
+  align-items: center;
 }
