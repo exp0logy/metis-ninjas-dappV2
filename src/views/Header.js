@@ -33,7 +33,7 @@ export default function Header() {
 
 
     return (
-        <Navbar style={{ backgroundColor: "black" }} className="sticky-top" variant="dark" expand="lg">
+        <Navbar style={{ padding: "15px 0", backgroundColor: "black" }} className="sticky-top" variant="dark" expand="lg">
             <Container>
                 <Row>
                     <Navbar.Brand href="#home">

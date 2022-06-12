@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
 import {
   fetchMintedTokens,
-  getCurrentWalletConnected,
-  mintNFT,
+  mintNFT
 } from "../utils/interact.js";
 import { Row, Col, Alert } from "react-bootstrap";
 import styled from "styled-components";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { useSelector } from "react-redux";
 
 const Ninja = styled.img`
 width: 200px;
@@ -17,15 +17,14 @@ border-radius: 10px;
 `
 
 const NinjaAdjust = styled.button`
-  width: 140px;
-  height: 50px;
+  padding: 10px 35px;
   border-radius: 100px;
   margin: 20px 30px;
+  display: inline-block;
 `
-
-
 const Minter = (props) => {
-  const [walletAddress, setWallet] = useState("");
+  const wallet = useSelector((state) => state.wallet.connected);
+
   const [status, setStatus] = useState("");
   const [success, setSuccess] = useState(false);
   const [count, setCount] = useState(0);
@@ -35,50 +34,14 @@ const Minter = (props) => {
 
   useEffect(() => {
     const fetchData = async () => {
-      addWalletListener();
-    };
-    fetchData();
-  }, []);
-
-  useEffect(() => {
-    const fetchData = async () => {
       const data = await fetchMintedTokens();
       setInfo(data);
     };
     fetchData();
   });
 
-  function addWalletListener() {
-    if (window.ethereum) {
-      window.ethereum.on("accountsChanged", (accounts) => {
-        if (accounts.length > 0) {
-          setWallet(accounts[0]);
-          setStatus("");
-          // setStatus("👆🏽 Write a message in the text-field above.");
-        } else {
-          setWallet("");
-          setStatus("🦊 Connect to Metamask using the top right button.");
-        }
-      });
-    } else {
-      setStatus(
-        <p>
-          {" "}
-          🦊{" "}
-          <a
-            target="_blank"
-            rel="noreferrer"
-            href={`https://metamask.io/download.html`}
-          >
-            You must install Metamask, a virtual Ethereum wallet, in your
-            browser.
-          </a>
-        </p>
-      );
-    }
-  }
-
   const onMintPressed = async (e) => {
+    if (!wallet) { walletError() }
     e.preventDefault();
     const { success, status, tx } = await mintNFT(count);
     console.log(status, success);
@@ -97,6 +60,7 @@ const Minter = (props) => {
       }
 
       setMintedTokens(mintedTokensFromTX);
+      mintSuccess()
       return;
     } else {
       setSuccess(false);
@@ -104,6 +68,30 @@ const Minter = (props) => {
       console.log(error)
     }
   };
+
+  const walletError = () => {
+    toast.error('Wallet Not Connected.', {
+      position: "top-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
+  }
+
+  const mintSuccess = () => {
+    toast.success('Mint Successful!', {
+      position: "top-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
+  }
 
   function increment() { setCount(count + 1); }
   function decrement() { setCount(count - 1); }
@@ -123,34 +111,39 @@ const Minter = (props) => {
             <h2 style={{ padding: "10px 0" }}>{count}</h2>
           </Row>
           <Row style={{ padding: "10px 0" }}>
-            <div className="text-center">
-              <NinjaAdjust disabled={count == 0} onClick={decrement}>-</NinjaAdjust>
+
+            <Col lg={{ span: 2, offset: 2, order: 1 }} md={{ order: 3 }} sm={{ order: 3 }}>
+              <NinjaAdjust disabled={count == 0} onClick={decrement}><strong>-</strong></NinjaAdjust>
+            </Col>
+            <Col lg={4} md={{ order: 2 }} sm={{ order: 2 }}>
               <NinjaAdjust
                 disabled={count == 0}
                 onClick={onMintPressed}>
                 Mint NFT
               </NinjaAdjust>
-              <NinjaAdjust onClick={increment}>+</NinjaAdjust>
-              {!success && count != 0 && (
-                <p style={{ paddingTop: "15px" }}>Total Cost: {parseFloat(price * count).toFixed(1)} Metis</p>
-              )}
-              <p style={{ paddingTop: "10px" }}>1 - 2 Ninjas = 2 Metis each<br />
-                3 - 5 Ninjas = 1.7 Metis each<br />
-                6 - 10 Ninjas = 1.5 Metis each<br />
-                10+ Ninjas = 1.2 Metis each</p>
-              {error && <ToastContainer
-                position="top-right"
-                autoClose={5000}
-                hideProgressBar={false}
-                newestOnTop={false}
-                closeOnClick
-                rtl={false}
-                pauseOnFocusLoss
-                draggable
-                pauseOnHover
-              />
-              }
-            </div>
+            </Col>
+            <Col lg={{ span: 2, offset: 0, order: 3 }} md={{ order: 1 }} sm={{ order: 1 }}>
+              <NinjaAdjust onClick={increment}><strong>+</strong></NinjaAdjust>
+            </Col>
+          </Row>
+          <Row>
+            {!success && count != 0 && (
+              <p style={{ paddingTop: "15px" }}>Total Cost: {parseFloat(price * count).toFixed(1)} Metis</p>
+            )}
+            <p style={{ paddingTop: "10px" }}>1 - 2 Ninjas = 2 Metis each<br />
+              3 - 5 Ninjas = 1.7 Metis each<br />
+              6 - 10 Ninjas = 1.5 Metis each<br />
+              10+ Ninjas = 1.2 Metis each</p>
+            <ToastContainer
+              position="top-right"
+              autoClose={5000}
+              hideProgressBar={false}
+              newestOnTop={false}
+              closeOnClick
+              rtl={false}
+              pauseOnFocusLoss
+              draggable
+            />
           </Row>
         </Col >
       ) : (

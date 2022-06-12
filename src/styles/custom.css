@@ -74,6 +74,11 @@ button:hover {
   .section {
     padding: 0 15px;
   }
+
+  .about,
+  .container {
+    padding-left: 30px;
+  }
 }
 
 @media screen and (max-width: 650px) {
@@ -88,9 +93,13 @@ button:hover {
 }
 
 @media screen and (max-width: 576px) {
-  .footerSocialCol {
+  .footer-links {
     display: block;
   }
+}
+
+.footer-links {
+  display: inline-block;
 }
 
 ul .slider .animated {
@@ -110,4 +119,10 @@ ul .slider .animated {
 .vert-center {
   display: flex;
   align-items: center;
+}
+
+@media screen and (max-width: 576px) {
+  .footer-links {
+    display: block;
+  }
 }

@@ -2,7 +2,7 @@ import BigNumber from "bignumber.js";
 import Web3 from "web3/dist/web3.min.js";
 import contractABI from "./contract-abi.json";
 
-const contractAddress = "0x4FEc2339cC9dcD9bfFDAcC589460111A06cAB80c"; //TESNET 
+const contractAddress = "0x433e9C315420803Bd3f78E6846Fc9bb45554B3CB"; //TESNET 
 //const contractAddress = "0xE1f73A7146d23E7dD666CCd5C8D27d976024DeE4"; // MAINNET
 
 export const connectWallet = async () => {
@@ -92,8 +92,8 @@ export const mintNFT = async (count) => {
   try {
     const tx = await NinjasContract.methods.purchase(count).send({
       from: window.ethereum.selectedAddress,
-      value: value,
-      gasLimit: 3000000
+      // value: value,
+      gasLimit: BigNumber(160000 * count)
     });
     return {
       success: true,

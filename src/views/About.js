@@ -24,7 +24,7 @@ const PartnerImages = [
 export default function About() {
 
     return (
-        <Container>
+        <Container className="about">
             <Row className="about-rows vert-center">
                 <Col lg={{ span: 5, offset: 1 }} md={6}>
                     <h1>What is BlockChat DAO?</h1>
@@ -71,7 +71,7 @@ export default function About() {
                 </Col>
             </Row>
             <Row className="about-rows vert-center">
-                <Col lg={{ span: 5, offset: 1 }}>
+                <Col lg={{ span: 5, offset: 1 }} md={6}>
                     <h1>Roadmap</h1>
                     <br />
                     <h4>Q2 2022</h4>
