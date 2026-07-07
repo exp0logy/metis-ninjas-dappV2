@@ -1,4 +1,4 @@
-import { Col, Container, Row } from "react-bootstrap";
+import { Col, Container } from "react-bootstrap";
 import { socialLinks, SocialLink } from './Header';
 import { Nav } from "react-bootstrap";
 
@@ -10,7 +10,7 @@ export default function Footer() {
                 <h5>© Metis Ninjas 2022</h5>
             </Col>
             <Col className="footer-links" lg={4} sm={12}>
-                <img className="pbp" src="/images/PBP.png" />
+                <img className="pbp" src="/images/PBP.png" alt="Powered by Peak" />
             </Col>
             <Col className="socialsFooter text-center" md={12} sm={12}>
                 {socialLinks.map((e) => (

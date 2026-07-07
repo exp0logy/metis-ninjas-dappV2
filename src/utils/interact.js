@@ -84,6 +84,7 @@ export const mintNFT = async (count) => {
   const web3 = new Web3(window.ethereum);
   const NinjasContract = new web3.eth.Contract(contractABI, contractAddress);
 
+  // eslint-disable-next-line no-unused-vars
   const value = BigNumber(oneMintPrice(count))
     .shiftedBy(18)
     .times(count)

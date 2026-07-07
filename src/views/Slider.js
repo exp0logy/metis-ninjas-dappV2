@@ -27,46 +27,6 @@ let sliderSettingsSm = {
     transitionTime: 1000
 };
 
-const Ninjas = [
-    {
-        key: 1,
-        image: "/images/ninjas/1_resized.png",
-        alt: "Ninja 1"
-    },
-    {
-        key: 2,
-        image: "/images/ninjas/2_resized.png",
-        alt: "Ninja 2"
-    },
-    {
-        key: 3,
-        image: "/images/ninjas/3_resized.png",
-        alt: "Ninja 3"
-    },
-    {
-        key: 4,
-        image: "/images/ninjas/4_resized.png",
-        alt: "Ninja 4"
-    },
-    {
-        key: 5,
-        image: "/images/ninjas/5_resized.png",
-        alt: "Ninja 5"
-    },
-    {
-        key: 6,
-        image: "/images/ninjas/6_resized.png",
-        alt: "Ninja 6"
-    },
-    {
-        key: 7,
-        image: "/images/ninjas/7_resized.png",
-        alt: "Ninja 7"
-    },
-]
-
-
-
 export default function Slider() {
     const [isGreaterThan900px, setIsGreaterThan900px] = React.useState(true);
 

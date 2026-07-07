@@ -12,7 +12,6 @@ const ConWalletButton = styled.button`
 
 export default function ConnectWallet() {
 
-    const walletConnected = useSelector((state) => state.wallet.connected);
     const walletAddress = useSelector((state) => state.wallet.address);
     const dispatch = useDispatch();
 

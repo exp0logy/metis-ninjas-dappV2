@@ -1,7 +1,4 @@
 import { Col, Container, Row } from "react-bootstrap";
-import styled from "styled-components";
-import { Carousel } from "react-responsive-carousel";
-import { StyledDiv, AboutDiv } from "../components/Styleddivs";
 
 const PartnerImages = [
     {
@@ -33,7 +30,7 @@ export default function About() {
                         the Metis Andromeda Layer 2 network and powered by Peak Finance.</p>
                 </Col>
                 <Col style={{ textAlign: "center" }} lg={{ span: 5, offset: 1 }} md={6}>
-                    <img style={{ width: "300px" }} src="/images/partners/bcd.png" />
+                    <img style={{ width: "300px" }} src="/images/partners/bcd.png" alt="BlockChat DAO logo" />
                 </Col>
             </Row>
             <Row className="about-rows vert-center">
@@ -52,7 +49,7 @@ export default function About() {
                         There are 5000 uniquely designed Ninjas available. Each Ninja grants you a whitelist spot in the BCD Beta program + premium features of the DApp.</p>
                 </Col>
                 <Col style={{ textAlign: "center" }} lg={{ span: 5, offset: 1 }} md={6}>
-                    <img style={{ width: "300px" }} src="/images/1.png" />
+                    <img style={{ width: "300px" }} src="/images/1.png" alt="Metis Ninja NFT" />
                 </Col>
             </Row>
             <Row className="about-rows vert-center">
@@ -67,7 +64,7 @@ export default function About() {
                     </p>
                 </Col>
                 <Col style={{ textAlign: "center" }} lg={{ span: 5, offset: 1 }} md={6}>
-                    <img style={{ width: "300px" }} src="/images/2.png" />
+                    <img style={{ width: "300px" }} src="/images/2.png" alt="Metis Ninja NFT" />
                 </Col>
             </Row>
             <Row className="about-rows vert-center">
@@ -95,9 +92,9 @@ export default function About() {
                     <h1>Partners</h1>
                     {PartnerImages.map((e) => (
 
-                        <Col>
+                        <Col key={e.key}>
                             <a href={e.link}>
-                                <img style={{ margin: "20px 0", width: "200px" }} key={e.key} src={e.image} />
+                                <img style={{ margin: "20px 0", width: "200px" }} src={e.image} alt="Partner logo" />
                             </a>
                         </Col>
                     ))}

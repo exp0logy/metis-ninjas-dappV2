@@ -113,11 +113,11 @@ const Minter = (props) => {
           <Row style={{ padding: "10px 0" }}>
 
             <Col lg={{ span: 2, offset: 2, order: 1 }} md={{ order: 3 }} sm={{ order: 3 }}>
-              <NinjaAdjust disabled={count == 0} onClick={decrement}><strong>-</strong></NinjaAdjust>
+              <NinjaAdjust disabled={count === 0} onClick={decrement}><strong>-</strong></NinjaAdjust>
             </Col>
             <Col lg={4} md={{ order: 2 }} sm={{ order: 2 }}>
               <NinjaAdjust
-                disabled={count == 0}
+                disabled={count === 0}
                 onClick={onMintPressed}>
                 Mint NFT
               </NinjaAdjust>
@@ -127,7 +127,7 @@ const Minter = (props) => {
             </Col>
           </Row>
           <Row>
-            {!success && count != 0 && (
+            {!success && count !== 0 && (
               <p style={{ paddingTop: "15px" }}>Total Cost: {parseFloat(price * count).toFixed(1)} Metis</p>
             )}
             <p style={{ paddingTop: "10px" }}>1 - 2 Ninjas = 2 Metis each<br />
